@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Employee</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Add Employee</h1>
+        <form th:action="@{/saveEmployee}" method="post" onsubmit="return validateForm()">
+            <label for="empname">Name:</label>
+            <input type="text" id="empname" name="emp_name" th:required="required"><br><br>
+            <label for="empmobile">Mobile:</label>
+            <input type="text" id="empmobile" name="emp_mobile" th:required="required"><br><br>
+            <label for="empemail">Email:</label>
+            <input type="email" id="empemail" name="emp_email" th:required="required"><br><br>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+    <script>
+        function validateForm() {
+            var name = document.getElementById("empname").value;
+            var mobile = document.getElementById("empmobile").value;
+            var email = document.getElementById("empemail").value;
+            var nameRegex = /^[a-zA-Z\s]+$/; // Regex for name: only letters and spaces
+            var mobileRegex = /^\d{10}$/; // Regex for mobile: 10 digits
+            var emailRegex = /^[A-Za-z._]{3,}@[A-Za-z]{3,}[.]{1}[A-Za-z.]{2,6}$/; // Regex for email: valid email format
+            
+            if (!nameRegex.test(name)) {
+                alert("Name must contain only letters and spaces.");
+                return false;
+            }
+            
+            if (!mobileRegex.test(mobile)) {
+                alert("Mobile number must be 10 digits long.");
+                return false;
+            }
+            
+            if (!emailRegex.test(email)) {
+                alert("Invalid email format.");
+                return false;
+            }
+            
+            return true;
+        }
+    </script>
+</body>
+</html>

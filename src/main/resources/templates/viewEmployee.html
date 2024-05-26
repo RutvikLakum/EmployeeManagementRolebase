@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>View Employees</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Employees Management</h2>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Mobile</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            <tr th:each="employee : ${employee}">
+                <td th:text="${employee.emp_id}">ID</td>
+                <td th:text="${employee.emp_name}">Name</td>
+                <td th:text="${employee.emp_email}">Email</td>
+                <td th:text="${employee.emp_mobile}">Mobile</td>
+                <td><a th:href="@{'editEmployee/' + ${employee.emp_id}}">Edit</a></td>
+                <td><a th:href="@{'deleteEmployee/' + ${employee.emp_id}}">Delete</a></td>
+            </tr>
+        </table>
+        <br /> <a href="addEmployee"><button>Insert New Employee</button></a>
+    </div>
+    <div class="logout-btn">
+       <form action="/logout" method="post">
+            <input type="submit" value="Logout">
+        </form>
+    </div>
+</body>
+</html>
